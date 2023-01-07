@@ -20,19 +20,6 @@ public class CoffeeTypes {
     public int getPrice(){
         return price;
     }
-    public void setPrice(int x){
-        if (x == 1){
-            if (Steps.whichCoffee.equalsIgnoreCase("Espresso")){
-                price = 25;
-            }
-            else if (Steps.whichCoffee.equalsIgnoreCase("Americano")){
-                price = 20;
-            }
-            else if (Steps.whichCoffee.equalsIgnoreCase("Latte")){
-                price = 30;
-            }
-        }
-    }
     @Override
     public String toString() {
         return "Size='" + size + '\'' + ",Price='" + price + '}';

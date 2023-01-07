@@ -1,8 +1,5 @@
 package CoffeeMachine;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
 import java.util.*;
 
 public class Steps extends CoffeeTypes implements ToDoList {
@@ -12,6 +9,9 @@ public class Steps extends CoffeeTypes implements ToDoList {
     static int totalBill;
     static boolean randomflag=false;
     static int randomValue;
+    static int coffeCounter = 0;
+    
+    static int dailyCoffeValue;
 
     public Steps() {
     }
@@ -21,7 +21,24 @@ public class Steps extends CoffeeTypes implements ToDoList {
         giris();
     }
 
+    public static void DailyCoffee() {
+		dailyCoffeValue = new Random().nextInt(0,6);
+		switch (dailyCoffeValue) {
+			case 1:
+				System.out.println("Daily coffee is Espresso");break;
+			case 2:
+				System.out.println("Daily coffee is Filter Coffee");break;
+			case 3:
+				System.out.println("Daily coffee is Americano");break;
+			case 4:
+				System.out.println("Daily coffee is Cappucino");break;
+			case 5:
+				System.out.println("Daily coffee is Latte");break;
+		}
+	}
+    
     public static void giris() throws InterruptedException {
+    	DailyCoffee();
         Steps obj = new Steps();
         int secim = randomValue;
 
@@ -34,22 +51,22 @@ public class Steps extends CoffeeTypes implements ToDoList {
         switch (secim) {
             case 1:
                 whichCoffee = "Espresso";
-                totalBill += 20;
+                totalBill += (dailyCoffeValue == 1 ? 17 : 20);
                 obj.coffeeSize();
                 obj.addSugar();
                 obj.holdOn();
                 obj.bill();
                 break;
             case 2:
-                whichCoffee = " Filter Coffee";
-                totalBill += 25;
+                whichCoffee = "Filter Coffee";
+                totalBill += (dailyCoffeValue == 2 ? 22 : 25);
                 obj.coffeeSize();
                 obj.addMilk();
                 obj.holdOn();
                 obj.bill();
                 break;
             case 3:
-                totalBill += 30;
+                totalBill += (dailyCoffeValue == 3 ? 27 : 30);
                 whichCoffee = "Americano";
                 obj.coffeeSize();
                 obj.addSugar();
@@ -58,7 +75,7 @@ public class Steps extends CoffeeTypes implements ToDoList {
                 break;
             case 4:
                 whichCoffee = "Cappucino";
-                totalBill += 20;
+                totalBill += (dailyCoffeValue == 4 ? 17 : 20);
                 obj.coffeeSize();
                 obj.addSugar();
                 obj.holdOn();
@@ -66,7 +83,7 @@ public class Steps extends CoffeeTypes implements ToDoList {
                 break;
             case 5:
                 whichCoffee = "Latte";
-                totalBill += 20;
+                totalBill += (dailyCoffeValue == 5 ? 17 : 20);
                 obj.coffeeSize();
                 obj.addMilk();
                 obj.addSugar();
@@ -94,6 +111,10 @@ public class Steps extends CoffeeTypes implements ToDoList {
     }
 
     public void toList() {
+    	if(coffeCounter < 2)
+    		System.out.println("After buying " + (2-coffeCounter) +" next coffe is free");
+    	else
+    		System.out.println("You have free coffe");
         System.out.println("1-Espresso\n2-Filter Coffee\n3-Americano\n4-Cappucino\n5-Latte\n6-Random Coffe\n7-Exit");
     }
 
@@ -162,8 +183,14 @@ public class Steps extends CoffeeTypes implements ToDoList {
     }
 
     public void bill() throws InterruptedException {
+    	coffeCounter++;
+    	if(coffeCounter >= 3) {
+    		totalBill = coffeCounter = 0;
+    	}
+    		
         System.out.println(" bill is ---->" + totalBill);
-
+        totalBill=0;
+        
         while(true) {
             System.out.print("\n press 1 to exit press 2 to buy another coffee");
             int secim = TryCatch.intGiris();
