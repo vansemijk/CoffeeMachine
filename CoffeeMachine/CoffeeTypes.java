@@ -37,4 +37,9 @@ public class CoffeeTypes {
     public String toString() {
         return "Size='" + size + '\'' + ",Price='" + price + '}';
     }
+
+	public void setBill(int i) {
+		// TODO Auto-generated method stub
+		Steps.totalBill += i;
+	}
 }

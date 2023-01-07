@@ -6,22 +6,24 @@ import java.util.Scanner;
 import java.util.*;
 
 public class Steps extends CoffeeTypes implements ToDoList {
-	static int a = 0;
-	static boolean randomflag = false;
-	static Scanner scan = new Scanner(System.in);
-	static String whichCoffee = "";
-	static Map<String, CoffeeTypes> coffeeTypesMap = new HashMap<>();
+    static Scanner scan;
+    static String whichCoffee;
+    static Map<String, CoffeeTypes> coffeeTypesMap;
+    static int totalBill;
+    static boolean randomflag=false;
+    static int randomValue;
 
-	static int totalBill = 0;
+    public Steps() {
+    }
 
-	public static void start() throws InterruptedException {
-		System.out.println(" hosgeldiniz ustamm ");
-		giris();
-	}
+    public static void start() throws InterruptedException {
+        System.out.println("Welcome to coffee world");
+        giris();
+    }
 
-	public static void giris() throws InterruptedException {
-		Steps obj = new Steps();
-		int secim = a;
+    public static void giris() throws InterruptedException {
+        Steps obj = new Steps();
+        int secim = randomValue;
 
 		if (randomflag == false) {
 			obj.toList();
@@ -29,163 +31,165 @@ public class Steps extends CoffeeTypes implements ToDoList {
 		} else {
 			randomflag = false;
 		}
+        switch (secim) {
+            case 1:
+                whichCoffee = "Espresso";
+                totalBill += 20;
+                obj.coffeeSize();
+                obj.addSugar();
+                obj.holdOn();
+                obj.bill();
+                break;
+            case 2:
+                whichCoffee = " Filter Coffee";
+                totalBill += 25;
+                obj.coffeeSize();
+                obj.addMilk();
+                obj.holdOn();
+                obj.bill();
+                break;
+            case 3:
+                totalBill += 30;
+                whichCoffee = "Americano";
+                obj.coffeeSize();
+                obj.addSugar();
+                obj.holdOn();
+                obj.bill();
+                break;
+            case 4:
+                whichCoffee = "Cappucino";
+                totalBill += 20;
+                obj.coffeeSize();
+                obj.addSugar();
+                obj.holdOn();
+                obj.bill();
+                break;
+            case 5:
+                whichCoffee = "Latte";
+                totalBill += 20;
+                obj.coffeeSize();
+                obj.addMilk();
+                obj.addSugar();
+                obj.holdOn();
+                obj.bill();
+            case 6:
+    			randomValue = new Random().nextInt(1, 6);
+    			randomflag = true;
+    			giris();
+    			break;
+    		
+        }
 
-		switch (secim) {
-		case 1:
-			whichCoffee = " Türk Kahvesi";
-			obj.coffeeSize();
-			obj.addSugar();
-			obj.addMilk();
-			obj.holdOn();
-			obj.bill();
-			break;
-		case 2:
-			whichCoffee = " Filtre Kahve";
-			obj.coffeeSize();
-			obj.addMilk();
-			obj.holdOn();
-			obj.bill();
-			break;
+    }
 
-		case 3:
-			whichCoffee = "Expresso";
-			obj.coffeeSize();
-			obj.addSugar();
-			obj.addMilk();
-			obj.holdOn();
-			obj.bill();
-			break;
-		case 5:
-			a = new Random().nextInt(1, 4);
-			randomflag = true;
+    public void holdOn() throws InterruptedException {
+        System.out.print(whichCoffee + " is prepearing");
 
-			giris();
-			break;
-		}
+        for(int i = 1; i <= 3; ++i) {
+            System.out.print(".");
+            Thread.sleep(1000L);
+        }
 
-	}
+        System.out.println("Coffe is ready \n");
+    }
 
-	@Override
-	public void holdOn() throws InterruptedException {
-		System.out.print(whichCoffee + " prepearing");
-		for (int i = 1; i <= 3; i++) {
-			System.out.print(" . ");
-			Thread.sleep(1000);
+    public void toList() {
+        System.out.println("1-Espresso\n2-Filter Coffee\n3-Americano\n4-Cappucino\n5-Latte\n6-Random Coffe\n7-Exit");
+    }
 
-		}
-		System.out.println(" coffee is ready \n");
+    public void addMilk() throws InterruptedException {
+        System.out.println("\n Do you wanna add milk?\n1-yes\n2-no");
+        String answer = scan.next();
+        if (answer.equalsIgnoreCase("1")) {
+            System.out.print("adding milk");
 
-	}
+            for(int i = 1; i <= 3; ++i) {
+                System.out.print(".");
+                Thread.sleep(1000L);
+            }
+        } else if (answer.equalsIgnoreCase("2")) {
+            System.out.print("no milk ");
+        } else {
+            this.addMilk();
+        }
 
-	@Override
-	public void toList() {
-		System.out.println("1 -----> Espersso \n**2-Latte\n**3-Americano\n**4-Exit");
-	}
+    }
 
-	@Override
-	public void addMilk() throws InterruptedException {
-		System.out.println("\n wanna add milk?");
-		String answer = scan.next();
+    public void addSugar() throws InterruptedException {
+        System.out.println("Do you wanna add sugar?\n1-yes\n2-no");
+        String answer = scan.next();
+        if (answer.equalsIgnoreCase("1")) {
+            System.out.println("how many sugar cubes\n ");
+            TryCatch TryCatch = new TryCatch();
+            int sugar = TryCatch.intGiris();
+            System.out.print("" + sugar + "sugar adding");
 
-		if (answer.equalsIgnoreCase("yes")) {
-			System.out.println("\n laktozsuz veya normal ? ");
-			String answer2 = scan.next();
-			if (answer2.equalsIgnoreCase("laktossuz")) {
-				System.out.print("laktossuz adding milk");
-				for (int i = 1; i <= 3; i++) {
-					System.out.print(".");
-					Thread.sleep(1000);
+            for(int i = 1; i <= 3; ++i) {
+                System.out.print(".");
+                Thread.sleep(1000L);
+            }
+        } else if (answer.equalsIgnoreCase("2")) {
+            System.out.println("NO SUGAR ");
+        } else {
+            System.out.println(" please try again");
+            this.addSugar();
+        }
 
-				}
-			} else if (answer2.equalsIgnoreCase("normal"))
-				;
-			System.out.print("adding milk");
-			for (int i = 1; i <= 3; i++) {
-				System.out.print(".");
-				Thread.sleep(1000);
-			}
-		} else if (answer.equalsIgnoreCase("no")) {
-			System.out.print("no milk ");
+    }
 
-		} else {
-			System.out.println("try again");
-			addMilk();
-		}
-	}
+    public void coffeeSize() {
+        CoffeeTypes coffee = new CoffeeTypes();
+        System.out.println(" which size do you want your coffee\n1----> small \n2---->medium\n3---> large");
+        int secim = TryCatch.intGiris();
+        if (secim == 1) {
+            coffee.setSize("small");
+            coffee.setBill(5);
+            coffeeTypesMap.put(whichCoffee, coffee);
+        } else if (secim == 2) {
+            coffee.setSize("medium");
+            coffee.setBill(10);
+            coffeeTypesMap.put(whichCoffee, coffee);
+        } else if (secim == 3) {
+            coffee.setSize("large");
+            coffee.setBill(15);
+            coffeeTypesMap.put(whichCoffee, coffee);
+        } else {
+            System.out.println("try again");
+            this.coffeeSize();
+        }
 
-	@Override
-	public void addSugar() throws InterruptedException {
-		System.out.println("Do you wanna add sugar ? ( yes or no )");
-		String answer = scan.next();
-		if (answer.equalsIgnoreCase("yes")) {
-			System.out.println("how many sugar cubes\n ");
-			TryCatch TryCatch = new TryCatch();
-			int sugar = TryCatch.intGiris();
-			System.out.print(sugar + "sugar adding");
-			for (int i = 1; i <= 3; i++) {
-				System.out.print(".");
-				Thread.sleep(1000);
-			}
-		} else if (answer.equalsIgnoreCase("no")) {
-			System.out.println("NO SUGAR ");
+        totalBill += coffee.getPrice();
+    }
 
-		} else {
-			System.out.println(" please try again");
-			addSugar();
-		}
+    public void bill() throws InterruptedException {
+        System.out.println(" bill is ---->" + totalBill);
 
-	}
+        while(true) {
+            System.out.print("\n press 1 to exit press 2 to buy another coffee");
+            int secim = TryCatch.intGiris();
+            if (secim == 1) {
+                this.exit();
+                break;
+            }
 
-	@Override
-	public void coffeeSize() {
-		CoffeeTypes coffee = new CoffeeTypes();
-		System.out.println(" which size do you want your coffee\n1----> small \n2---->medium\n3---> large");
-		int secim = TryCatch.intGiris();
-		if (secim == 1) {
-			coffee.setSize("small");
-			coffee.setPrice(secim);
-			coffeeTypesMap.put(whichCoffee, coffee);
+            if (secim == 2) {
+                giris();
+                break;
+            }
 
-		} else if (secim == 2) {
-			coffee.setSize("medium");
-			coffee.setPrice(secim);
-			coffeeTypesMap.put(whichCoffee, coffee);
+            System.out.println("try again");
+        }
 
-		} else if (secim == 3) {
-			coffee.setSize("large");
-			coffee.setPrice(secim);
-			coffeeTypesMap.put(whichCoffee, coffee);
+    }
 
-		} else {
-			System.out.println("try again");
-			coffeeSize();
-		}
-		totalBill += coffee.getPrice();
+    public void exit() {
+        System.out.println("We are waiting for you again");
+    }
 
-	}
-
-	@Override
-	public void bill() throws InterruptedException {
-		System.out.println(" bill is ---->" + totalBill);
-		while (true) {
-			System.out.print("\n press 1 to exit press 2 to buy another coffee");
-			int secim = TryCatch.intGiris();
-			if (secim == 1) {
-				exit();
-				break;
-
-			} else if (secim == 2) {
-				giris();
-				break;
-
-			} else {
-				System.out.println("try again");
-			}
-		}
-	}
-
-	@Override
-	public void exit() {
-		System.out.println("come again");
-	}
+    static {
+        scan = new Scanner(System.in);
+        whichCoffee = "";
+        coffeeTypesMap = new HashMap();
+        totalBill = 0;
+    }
 }
