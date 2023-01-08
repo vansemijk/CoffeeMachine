@@ -12,7 +12,7 @@ public class Steps implements ToDoList {
     static int randomValue;
     static int coffeCounter = 0;
 
-    static int dailyCoffeValue;
+    static int dailyCoffeValue = 0;
 
     public Steps() {
     }
@@ -44,6 +44,7 @@ public class Steps implements ToDoList {
     }
 
     public static void screen() throws InterruptedException {
+        if (dailyCoffeValue == 0)
         DailyCoffee();
         Steps obj = new Steps();
         int choose = randomValue;

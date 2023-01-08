@@ -1,7 +1,10 @@
 package CoffeeMachine.CoffeeMachine;
+
 import java.util.Scanner;
+
 public class TryCatch {
     static Scanner scan = new Scanner(System.in);
+
     public static int GetValueFromUser() {
         int choose = 0;
         boolean flag = false;
