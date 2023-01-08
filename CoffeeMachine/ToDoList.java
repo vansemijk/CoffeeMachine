@@ -1,4 +1,4 @@
-package CoffeeMachine.CoffeeMachine;
+package CoffeeMachine;
 public interface ToDoList {
     void holdOn() throws InterruptedException;
     void toList() throws InterruptedException;

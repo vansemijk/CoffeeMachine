@@ -1,4 +1,4 @@
-package CoffeeMachine.CoffeeMachine;
+package CoffeeMachine;
 import java.util.Scanner;
 public class TryCatch {
     static Scanner scan = new Scanner(System.in);
