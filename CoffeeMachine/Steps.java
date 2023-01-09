@@ -16,7 +16,6 @@ public class Steps implements ToDoList {
 
     public Steps() {
     }
-
     public static void start() throws InterruptedException {
         System.out.println("Welcome to coffee world");
         screen();
@@ -45,7 +44,7 @@ public class Steps implements ToDoList {
 
     public static void screen() throws InterruptedException {
         if (dailyCoffeValue == 0)
-        DailyCoffee();
+            DailyCoffee();
         Steps obj = new Steps();
         int choose = randomValue;
 
@@ -119,7 +118,7 @@ public class Steps implements ToDoList {
             System.out.println("Buy " + (2 - coffeCounter) + " coffee, other coffee is free");
         else
             System.out.println("You have free coffee");
-        System.out.println("1-Espresso\n2-Filter Coffee\n3-Americano\n4-Macchiato\n5-Latte\n6-Random Coffee\n7-Exit");
+        System.out.println("1-Espresso  [27]\n2-Filter Coffee  [25]\n3-Americano  [27]\n4-Macchiato  [35]\n5-Latte  [37]\n6-Random Coffee\n7-Exit");
     }
 
     public void addMilk() throws InterruptedException {
@@ -152,6 +151,7 @@ public class Steps implements ToDoList {
 
     public void addSugar() throws InterruptedException {
         System.out.println("\nDo you wanna add sugar?\n1-Yes\n2-No");
+        scan = new Scanner(System.in);
         String answer = scan.nextLine();
         if (answer.equalsIgnoreCase("1")) {
             System.out.println("How many cubes of sugar do you want to add?\n ");
@@ -172,7 +172,7 @@ public class Steps implements ToDoList {
 
     public void coffeeSize() {
 
-        System.out.println("Which size do you want your coffee\n1----> Small \n2----> Medium\n3---> Large");
+        System.out.println("Which size do you want your coffee\n1----> Small \n2----> Medium (+3)\n3---> Large (+5)");
         int choose = TryCatch.GetValueFromUser();
         if (choose == 1) {
 
@@ -213,7 +213,6 @@ public class Steps implements ToDoList {
             System.out.println("Try again");
         }
     }
-
     public void exit() {
         System.out.println("We are waiting for you again");
     }
